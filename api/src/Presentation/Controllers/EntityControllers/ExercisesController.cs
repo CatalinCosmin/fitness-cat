@@ -35,7 +35,7 @@ namespace Api.Controllers.EntityControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExercise([FromRoute] int id)
         {
-            var result = _exerciseRepository.GetExercise(id);
+            var result = await _exerciseRepository.GetExerciseAsync(id);
 
             return result switch
             {

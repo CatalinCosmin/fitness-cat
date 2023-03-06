@@ -23,7 +23,7 @@ namespace Core.Application.Validators
                 }
             });
             RuleFor(user => user.Username)
-                .MustAsync(async (Username, cancellation) =>
+                .Must((Username) =>
             {
                 var u = _userRepository.GetUser(u => u.Username == Username);
 
@@ -35,7 +35,7 @@ namespace Core.Application.Validators
                 .EmailAddress()
                 .WithMessage("Email is not of valid format.");
             RuleFor(user => user.Email)
-                .MustAsync(async (Email, cancellation) =>
+                .Must((Email) =>
                 {
                     var u = _userRepository.GetUser(u => u.Email == Email);
 
@@ -52,7 +52,6 @@ namespace Core.Application.Validators
                 .WithMessage("Birth date must not be empty.")
                 .Custom((BirthDate, context) =>
                 {
-
                     var age = DateTime.UtcNow - BirthDate.ToDateTime(TimeOnly.MinValue);
                     if (age.Days < 1 * 264)
                     {

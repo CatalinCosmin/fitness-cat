@@ -19,7 +19,7 @@ namespace Api.Controllers.EntityControllers
         [HttpGet("")]
         public async Task<IActionResult> GetMuscleGroups()
         {
-            var muscleGroups = _muscleGroupRepository.GetMuscleGroupList();
+            var muscleGroups = await _muscleGroupRepository.GetMuscleGroupListAsync();
             if (muscleGroups == null)
             {
                 return BadRequest();
@@ -30,7 +30,7 @@ namespace Api.Controllers.EntityControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMuscleGroup([FromRoute] int id)
         {
-            var result = _muscleGroupRepository.GetMuscleGroup(id);
+            var result = await _muscleGroupRepository.GetMuscleGroupAsync(id);
 
             return result switch
             {

@@ -1,8 +1,6 @@
-﻿using api.Domain.DataTypes;
-using Core.Abstractions.Entities;
+﻿using Core.Abstractions.Entities;
 using Core.Abstractions.Models;
 using Core.Abstractions.Services.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers.Authentication

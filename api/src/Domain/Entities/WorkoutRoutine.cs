@@ -4,7 +4,7 @@
     {
         public Guid ID { get; set; }
         public int AccesibilityLevel { get; set; }
-        public IUser? Owner { get; set; } = null;
+        public IUser Owner { get; set; } = new User();
         public List<IWorkout> Workouts { get; set; } = new();
     }
 }

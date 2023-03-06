@@ -10,9 +10,15 @@ public static class ConfigureServices
     {
         services.AddDbContext<DataContext>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
-        services.AddTransient<IExerciseRepository, ExerciseRepository>();
+
         services.AddTransient<IUserRepository, UserRepository>();
+
+        services.AddTransient<IEquipmentRepository, EquipmentRepository>();
         services.AddTransient<IMuscleRepository, MuscleRepository>();
+        services.AddTransient<IMuscleGroupRepository, MuscleGroupRepository>();
+        services.AddTransient<IExerciseRepository, ExerciseRepository>();
+        services.AddTransient<IWorkoutRepository, WorkoutRepository>();
+        services.AddTransient<IWorkoutRoutineRepository, WorkoutRoutineRepository>();
         return services;
     }
 }

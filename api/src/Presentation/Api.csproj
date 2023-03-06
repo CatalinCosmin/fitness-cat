@@ -24,13 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Core.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <Folder Include="Requests\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Requests\" />
-    <Folder Include="Responses\" />
+    <ProjectReference Include="..\Domain\Core.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

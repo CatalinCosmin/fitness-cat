@@ -1,91 +1,102 @@
-﻿//using api.Domain.Abstractions.Services.Auth;
-//using api.Domain.Abstractions.Services.WorkoutsServices;
-//using api.Domain.DataTypes;
-//using Application.Common.Interfaces.Authentication;
-//using Application.Common.Interfaces.WorkoutsServices;
-//using Application.DTOs;
-//using Infrastructure.Extensions;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.IdentityModel.Tokens;
+﻿using Application.Common.Interfaces.WorkoutBuilder;
+using Core.Abstractions.Context;
+using Core.Abstractions.Entities;
+using Core.Abstractions.Services.WorkoutsServices;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
-//namespace api.Controllers.EntityControllers
-//{
-//    [ApiController]
-//    [Route("[controller]")]
-//    public class WorkoutRoutinesController : Controller
-//    {
-//        private readonly ILogger<WorkoutRoutinesController> _logger;
-//        private readonly IAuthService _authService;
-//        private readonly IWorkoutRoutineService _workoutRoutineService;
-//        public WorkoutRoutinesController(ILogger<WorkoutRoutinesController> logger, IAuthService authService, IWorkoutRoutineService workoutRoutineService)
-//        {
-//            _logger = logger;
-//            _authService = authService;
-//            _workoutRoutineService = workoutRoutineService;
-//        }
+namespace Api.Controllers.EntityControllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class WorkoutRoutinesController : Controller
+    {
+        private readonly ILogger<WorkoutRoutinesController> _logger;
+        private readonly IWorkoutRoutineService _workoutRoutineService;
+        private readonly IWorkoutRoutineRepository _workoutRoutineRepository;
+        public WorkoutRoutinesController(ILogger<WorkoutRoutinesController> logger, IWorkoutRoutineService workoutRoutineService, IWorkoutRoutineRepository workoutRoutineRepository)
+        {
+            _logger = logger;
+            _workoutRoutineService = workoutRoutineService;
+            _workoutRoutineRepository = workoutRoutineRepository;
+        }
 
-//        [Authorize]
-//        [HttpGet("{id}")]
-//        public async Task<IActionResult> GetWorkoutRoutine([FromRoute] Guid id)
-//        {
-//            var userId = HttpContext.GetAccountId();
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWorkoutRoutine([FromRoute] Guid id)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            var result = await _workoutRoutineService.GetWorkoutRoutineDtoAsync(userId, id);
-//            return result switch
-//            {
-//                Result<WorkoutRoutineDto, string>.Success(WorkoutRoutineDto data) => Ok(data),
-//                Result<WorkoutRoutineDto, string>.Error(string data) => BadRequest(data),
-//                _ => BadRequest()
-//            };
-//        }
+            var result = await _workoutRoutineRepository.GetWorkoutRoutineAsync(userId, id);
+            return result switch
+            {
+                IWorkoutRoutine => Ok(result),
+                _ => BadRequest()
+            };
+        }
 
-//        [Authorize]
-//        [HttpGet("")]
-//        public async Task<IActionResult> GetWorkoutRoutines()
-//        {
-//            var userId = HttpContext.GetAccountId();
+        [Authorize]
+        [HttpGet("")]
+        public async Task<IActionResult> GetWorkoutRoutines()
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            var result = await _workoutRoutineService.GetWorkoutRoutineListAsync(userId);
-//            if (result.IsNullOrEmpty())
-//            {
-//                return NoContent();
-//            }
+            var result = await _workoutRoutineRepository.GetWorkoutRoutineListAsync(userId);
+            if (result.IsNullOrEmpty())
+            {
+                return NoContent();
+            }
 
-//            return Ok(result);
-//        }
+            return Ok(result);
+        }
 
-//        [Authorize]
-//        [HttpPut("{workoutRoutineId}/workout/{workoutId}")]
-//        public async Task<IActionResult> RemoveExercise([FromRoute] Guid workoutRoutineId, [FromRoute] Guid workoutId)
-//        {
-//            var userId = HttpContext.GetAccountId();
+        [Authorize]
+        [HttpPatch("{workoutRoutineId}/workout/{workoutId}")]
+        public async Task<IActionResult> RemoveExercise([FromRoute] Guid workoutRoutineId, [FromRoute] Guid workoutId)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            var result = await _workoutRoutineService.RemoveWorkoutFromRoutine(userId, workoutRoutineId, workoutId);
+            var result = await _workoutRoutineService.RemoveWorkoutFromRoutine(userId, workoutRoutineId, workoutId);
 
-//            if (result == false)
-//            {
-//                return BadRequest();
-//            }
+            if (result == false)
+            {
+                return BadRequest();
+            }
 
-//            return Ok();
-//        }
+            return Ok();
+        }
 
-//        [Authorize]
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteWorkout([FromRoute] Guid id)
-//        {
-//            var userId = HttpContext.GetAccountId();
+        [Authorize]
+        [HttpPut("/workoutroutine")]
+        public async Task<IActionResult> PostWorkoutRoutine([FromQuery] List<Guid> workouts)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            var result = await _workoutRoutineService.DeleteWorkoutRoutineAsync(userId, id);
+            var result = await _workoutRoutineRepository.CreateWorkoutRoutineAsync(userId, workouts);
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction("PostWorkoutRoutine", result);
+        }
 
-//            if (result == false)
-//            {
-//                return BadRequest();
-//            }
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWorkout([FromRoute] Guid id)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            return Ok();
-//        }
+            var result = await _workoutRoutineRepository.DeleteWorkoutRoutineAsync(userId, id);
 
-//    }
-//}
+            if (result == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+    }
+}

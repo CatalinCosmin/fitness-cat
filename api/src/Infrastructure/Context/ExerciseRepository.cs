@@ -4,8 +4,6 @@ using Core.Entities;
 using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,35 +12,38 @@ namespace Infrastructure.Context
     class ExerciseRepository : IExerciseRepository
     {
         private readonly DataContext _context;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public ExerciseRepository(DataContext context, IUnitOfWork unitOfWork)
+        public ExerciseRepository(DataContext context)
         {
             _context = context;
-            _unitOfWork = unitOfWork;
         }
 
-        public IExercise? GetExercise(int id)
+        public async Task<IExercise?> GetExerciseAsync(int id)
         {
-            return _context.Exercises
+            var result = await _context.Exercises
                 .Where(e => e.ID == id)
                 .Include(e => e.Equipments)
                 .Include(e => e.MuscleGroups)
                 .Include(e => e.Muscles)
-                .FirstOrDefault()?.ToModel();
+                .SingleOrDefaultAsync();
+            return result?.ToModel();
         }
-
-        public IExercise? GetExercise(Func<IExercise, bool> predicate)
+        public IExercise? GetExercise(int id)
         {
-            return _context.Exercises
-                .Where((Func<Entities.Exercise, bool>)predicate)
-                .FirstOrDefault()?.ToModel();
+            var result = _context.Exercises
+                .Where(e => e.ID == id)
+                .Include(e => e.Equipments)
+                .Include(e => e.MuscleGroups)
+                .Include(e => e.Muscles)
+                .SingleOrDefault();
+            return result?.ToModel();
         }
 
         public async Task<List<IExercise>?> GetExerciseListAsync(int? muscleGroupId = null, int? muscleId = null, int? equipmentId = null, int? difficulty = null)
         {
             
             var query = _context.Exercises.AsQueryable();
+            query = query.Include(e => e.Equipments).Include(e => e.MuscleGroups).Include(e => e.Muscles);
 
             if (muscleGroupId != null)
             {
@@ -63,8 +64,6 @@ namespace Infrastructure.Context
             {
                 query = query.Where(e => e.Difficulty == difficulty);
             }
-
-            query = query.Include(e => e.Equipments).Include(e => e.MuscleGroups).Include(e => e.Muscles);
 
             var result = await query.ToListAsync();
 
