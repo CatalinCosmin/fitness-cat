@@ -21,10 +21,6 @@ D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\Infrastructure.d
 D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\Infrastructure.runtimeconfig.json
 D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\Infrastructure.dll
 D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\Infrastructure.pdb
-D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\api.Application.dll
-D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\api.Domain.dll
-D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\api.Application.pdb
-D:\projects\fitness-cat\api\src\Infrastructure\bin\Debug\net7.0\api.Domain.pdb
 D:\projects\fitness-cat\api\src\Infrastructure\obj\Debug\net7.0\Infrastructure.csproj.AssemblyReference.cache
 D:\projects\fitness-cat\api\src\Infrastructure\obj\Debug\net7.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 D:\projects\fitness-cat\api\src\Infrastructure\obj\Debug\net7.0\Infrastructure.AssemblyInfoInputs.cache

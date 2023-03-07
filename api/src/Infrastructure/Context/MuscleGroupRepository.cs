@@ -1,5 +1,4 @@
-﻿using Application.DTOs;
-using Core.Abstractions.Context;
+﻿using Core.Abstractions.Context;
 using Core.Abstractions.Entities;
 using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;

@@ -2043,26 +2043,6 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "api.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "BCrypt.Net-Next": "4.0.3",
-          "Core": "1.0.0",
-          "FluentValidation.AspNetCore": "11.2.2",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
-          "Microsoft.EntityFrameworkCore": "7.0.1",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
-          "Swashbuckle.AspNetCore": "6.2.3",
-          "mailosaur": "8.6.0"
-        },
-        "compile": {
-          "bin/placeholder/api.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/api.Application.dll": {}
-        }
-      },
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -6596,27 +6576,22 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "api.Application/1.0.0": {
-      "type": "project",
-      "path": "../Application/Application.csproj",
-      "msbuildProject": "../Application/Application.csproj"
-    },
     "Core/1.0.0": {
       "type": "project",
-      "path": "../Domain/Core.csproj",
-      "msbuildProject": "../Domain/Core.csproj"
+      "path": "../Core/Core.csproj",
+      "msbuildProject": "../Core/Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "BCrypt.Net-Next >= 4.0.3",
+      "Core >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.2.2",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.1",
       "Microsoft.EntityFrameworkCore >= 7.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.1",
       "Swashbuckle.AspNetCore >= 6.2.3",
-      "api.Application >= 1.0.0",
       "mailosaur >= 8.6.0"
     ]
   },
@@ -6652,8 +6627,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\projects\\fitness-cat\\api\\src\\Application\\Application.csproj": {
-              "projectPath": "D:\\projects\\fitness-cat\\api\\src\\Application\\Application.csproj"
+            "D:\\projects\\fitness-cat\\api\\src\\Core\\Core.csproj": {
+              "projectPath": "D:\\projects\\fitness-cat\\api\\src\\Core\\Core.csproj"
             }
           }
         }

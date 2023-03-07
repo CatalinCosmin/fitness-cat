@@ -30,7 +30,7 @@ namespace Infrastructure.Tests
 
             _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
             _fixture.Customize(new AutoMoqCustomization());
-            _repository = new ExerciseRepository(_context.Object, _unitOfWork.Object);
+            _repository = new ExerciseRepository(_context.Object);
             _unitOfWork.SetupGet(_ => _.Exercises).Returns(_repositoryMock.Object);
         }
 

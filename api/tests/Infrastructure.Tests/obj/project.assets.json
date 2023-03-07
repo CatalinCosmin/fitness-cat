@@ -2519,26 +2519,6 @@
           "build/netcoreapp3.1/xunit.runner.visualstudio.props": {}
         }
       },
-      "api.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "BCrypt.Net-Next": "4.0.3",
-          "Core": "1.0.0",
-          "FluentValidation.AspNetCore": "11.2.2",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
-          "Microsoft.EntityFrameworkCore": "7.0.1",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
-          "Swashbuckle.AspNetCore": "6.2.3",
-          "mailosaur": "8.6.0"
-        },
-        "compile": {
-          "bin/placeholder/api.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/api.Application.dll": {}
-        }
-      },
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -2561,12 +2541,12 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "Core": "1.0.0",
           "FluentValidation.AspNetCore": "11.2.2",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
           "Microsoft.EntityFrameworkCore": "7.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
           "Swashbuckle.AspNetCore": "6.2.3",
-          "api.Application": "1.0.0",
           "mailosaur": "8.6.0"
         },
         "compile": {
@@ -8025,15 +8005,10 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
-    "api.Application/1.0.0": {
-      "type": "project",
-      "path": "../../src/Application/Application.csproj",
-      "msbuildProject": "../../src/Application/Application.csproj"
-    },
     "Core/1.0.0": {
       "type": "project",
-      "path": "../../src/Domain/Core.csproj",
-      "msbuildProject": "../../src/Domain/Core.csproj"
+      "path": "../../src/Core/Core.csproj",
+      "msbuildProject": "../../src/Core/Core.csproj"
     },
     "Infrastructure/1.0.0": {
       "type": "project",
