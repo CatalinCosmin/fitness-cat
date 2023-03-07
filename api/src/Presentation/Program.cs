@@ -4,7 +4,7 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.WebHost.UseUrls("https://localhost:7061");
+        //builder.WebHost.UseUrls("https://localhost:7061");
 
         // Add services to the container.
 

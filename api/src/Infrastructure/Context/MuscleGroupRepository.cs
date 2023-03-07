@@ -23,12 +23,31 @@ namespace Infrastructure.Context
                 .ToModel();
         }
 
+        public async Task<IMuscleGroup?> GetMuscleGroupAsync(int id)
+        {
+            var result = await _context.MuscleGroups
+                .Where(mg => mg.ID == id)
+                .Include(mg => mg.Muscles)
+                .FirstOrDefaultAsync();
+            return result?.ToModel();
+
+        }
+
         public List<IMuscleGroup>? GetMuscleGroupList()
         {
             return _context.MuscleGroups
                 .Include(mg => mg.Muscles)
                 .ToList()
                 .ToModels();
+        }
+
+        public async Task<List<IMuscleGroup>?> GetMuscleGroupListAsync()
+        {
+            var result = await _context.MuscleGroups
+                .Include(mg => mg.Muscles)
+                .ToListAsync();
+
+            return result?.ToModels();
         }
     }
 }

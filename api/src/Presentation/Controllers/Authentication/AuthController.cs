@@ -1,9 +1,10 @@
-﻿using api.Domain.DataTypes;
+﻿using Api.Requests;
 using Core.Abstractions.Entities;
 using Core.Abstractions.Models;
 using Core.Abstractions.Services.Auth;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Api.Requests.Extensions;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Api.Controllers.Authentication
 {
@@ -20,22 +21,22 @@ namespace Api.Controllers.Authentication
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(IUser registerDto)
+        public async Task<IActionResult> Register(RegisterRequestDto registerDto)
         {
-            var results = await _authService.RegisterUserAsync(registerDto);
+            var results = await _authService.RegisterUserAsync(registerDto.ToModel());
 
-            return results switch
+            if(results == false)
             {
-                //Result<bool, List<IValidationFailureResponse>>.Success(bool) => StatusCode(201),
-                //Result<bool, List<IValidationFailureResponse>>.Error(List<IValidationFailureResponse> data) => BadRequest(data),
-                _ => BadRequest()
-            };
+                return BadRequest(registerDto);
+            }
+            return Created("register", registerDto.Email);
+
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(IUser loginDto)
+        public async Task<IActionResult> Login(LoginRequestDto loginDto)
         {
-            var result = await _authService.LoginUserAsync(loginDto);
+            var result = await _authService.LoginUserAsync(loginDto.ToModel());
             return Ok(result);
         }
         [HttpPost("verify_account")]
@@ -44,18 +45,5 @@ namespace Api.Controllers.Authentication
             var result = await _authService.VerifyAccount(token);
             return Ok("Email is verified.");
         }
-
-        //[Authorize]
-        //[HttpGet("getUsername")]
-        //public async Task<IActionResult> GetUsername(IToken token)
-        //{
-        //    var result = await _authService.GetUsername(token);
-        //    return result switch
-        //    {
-        //        Result<string, string>.Error(string data) => BadRequest(data),
-        //        Result<string, string>.Success(string data) => Ok(data),
-        //        _ => BadRequest()
-        //    };
-        //}
     }
 }

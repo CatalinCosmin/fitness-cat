@@ -23,7 +23,7 @@ namespace Presentation.Controllers.EntityControllers
         [HttpGet("")]
         public async Task<IActionResult> GetMuscles([FromQuery] int muscleGroupId)
         {
-            var muscles = _muscleRepository.GetMuscleList(muscleGroupId);
+            var muscles = await _muscleRepository.GetMuscleListAsync(muscleGroupId);
             if (muscles == null)
             {
                 return BadRequest();
@@ -34,7 +34,7 @@ namespace Presentation.Controllers.EntityControllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMuscle([FromRoute] int id)
         {
-            var result = _muscleRepository.GetMuscle(id);
+            var result = await _muscleRepository.GetMuscleAsync(id);
 
             return result switch
             {

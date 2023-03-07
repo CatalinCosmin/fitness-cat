@@ -1,91 +1,102 @@
-﻿//using api.Domain.Abstractions.Services.Auth;
-//using api.Domain.Abstractions.Services.WorkoutsServices;
-//using api.Domain.DataTypes;
-//using Application.Common.Interfaces.Authentication;
-//using Application.Common.Interfaces.WorkoutsServices;
-//using Domain.Common.Entities;
-//using Infrastructure.Extensions;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.IdentityModel.Tokens;
+﻿using Application.Common.Interfaces.WorkoutBuilder;
+using Core.Abstractions.Context;
+using Core.Abstractions.Services.WorkoutsServices;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
-//namespace api.Controllers.EntityControllers
-//{
-//    [ApiController]
-//    [Route("[controller]")]
-//    public class WorkoutsController : Controller
-//    {
-//        private readonly ILogger<WorkoutsController> _logger;
-//        private readonly IAuthService _authService;
-//        private readonly IWorkoutService _workoutService;
-//        public WorkoutsController(ILogger<WorkoutsController> logger, IAuthService authService, IWorkoutService workoutService)
-//        {
-//            _logger = logger;
-//            _authService = authService;
-//            _workoutService = workoutService;
-//        }
+namespace Api.Controllers.EntityControllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class WorkoutsController : Controller
+    {
+        private readonly ILogger<WorkoutsController> _logger;
+        private readonly IWorkoutService _workoutService;
+        private readonly IWorkoutRepository _workoutRepository;
+        public WorkoutsController(ILogger<WorkoutsController> logger, IWorkoutService workoutService, IWorkoutRepository workoutRepository)
+        {
+            _logger = logger;
+            _workoutService = workoutService;
+            _workoutRepository = workoutRepository;
+        }
 
-//        [Authorize]
-//        [HttpGet("{id}")]
-//        public async Task<IActionResult> GetWorkout([FromRoute] Guid id)
-//        {
-//            var userId = HttpContext.GetAccountId();
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWorkout([FromRoute] Guid id)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            var result = await _workoutService.GetWorkoutAsync(userId, id);
-//            return result switch
-//            {
-//                Result<IWorkout, string>.Success(IWorkout data) => Ok(data),
-//                Result<IWorkout, string>.Error(string data) => BadRequest(data),
-//                _ => BadRequest()
-//            };
-//        }
+            var result = await _workoutRepository.GetWorkoutAsync(userId, id);
+            if (result == null)
+            {
+                return NoContent();
+            }
 
-//        [Authorize]
-//        [HttpGet("")]
-//        public async Task<IActionResult> GetWorkouts()
-//        {
-//            var userId = HttpContext.GetAccountId();
+            return Ok(result);
+        }
 
-//            var result = await _workoutService.GetWorkoutListAsync(userId);
-//            if (result.IsNullOrEmpty())
-//            {
-//                return NoContent();
-//            }
+        [Authorize]
+        [HttpGet("")]
+        public async Task<IActionResult> GetWorkouts()
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            return Ok(result);
-//        }
+            var result = await _workoutRepository.GetWorkoutListAsync(userId);
+            if (result.IsNullOrEmpty())
+            {
+                return NoContent();
+            }
 
-//        [Authorize]
-//        [HttpPut("{workoutId}/exercise/{exerciseId}")]
-//        public async Task<IActionResult> RemoveExercise([FromRoute] Guid workoutId, [FromRoute] int exerciseId)
-//        {
-//            var userId = HttpContext.GetAccountId();
+            return Ok(result);
+        }
 
-//            var result = await _workoutService.RemoveExerciseFromWorkoutAsync(userId, workoutId, exerciseId);
+        [Authorize]
+        [HttpDelete("{workoutId}/exercises/{exerciseId}")]
+        public async Task<IActionResult> RemoveExercise([FromRoute] Guid workoutId, [FromRoute] int exerciseId)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            if (result == false)
-//            {
-//                return BadRequest();
-//            }
+            var result = await _workoutService.RemoveExerciseFromWorkoutAsync(userId, workoutId, exerciseId);
 
-//            return Ok();
-//        }
+            if (result == false)
+            {
+                return BadRequest();
+            }
 
-//        [Authorize]
-//        [HttpDelete("{id}")]
-//        public async Task<IActionResult> DeleteWorkout([FromRoute] Guid id)
-//        {
-//            var userId = HttpContext.GetAccountId();
+            return Ok();
+        }
 
-//            var result = await _workoutService.DeleteWorkoutAsync(userId, id);
+        [Authorize]
+        [HttpPost("")]
+        public async Task<IActionResult> CreateWorkout([FromQuery] List<int> exercises)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//            if (result == false)
-//            {
-//                return BadRequest();
-//            }
+            var result = await _workoutRepository.CreateWorkoutAsync(userId, exercises);
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            return CreatedAtAction("PostWorkout", result);
+        }
 
-//            return Ok();
-//        }
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWorkout([FromRoute] Guid id)
+        {
+            var userId = HttpContext.GetAccountId();
 
-//    }
-//}
+            var result = await _workoutRepository.DeleteWorkoutAsync(userId, id);
+
+            if (result == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+    }
+}

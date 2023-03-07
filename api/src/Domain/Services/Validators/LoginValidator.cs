@@ -10,20 +10,20 @@ namespace Core.Application.Validators
             RuleFor(x => x.Password)
                 .NotEmpty();
             RuleFor(x => x.Email)
-                .Null()
-                .When(x => x.Username.IsNullOrEmpty() == false)
-                .WithMessage("Insert only username or email.")
-                .OverridePropertyName("Meta");
-            RuleFor(x => x.Email)
-                .EmailAddress()
-                .WithMessage("Email is not of valid format.");
-            RuleFor(x => x.Username)
-                .Null()
-                .When(x => x.Email.IsNullOrEmpty() == false)
+                .Empty()
+                .When(x => x.Username != string.Empty)
                 .WithMessage("Insert only username or email.")
                 .OverridePropertyName("Meta");
             RuleFor(x => x.Username)
+                .Empty()
+                .When(x => x.Email != string.Empty)
+                .WithMessage("Insert only username or email.")
+                .OverridePropertyName("Meta")
                 .Matches("^[A-Za-z0-9]*$");
+            RuleFor(x => x.WorkoutRoutines)
+                .Empty();
+            RuleFor(x => x.Workouts)
+                .Empty();
         }
     }
 }

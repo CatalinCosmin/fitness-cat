@@ -1,4 +1,4 @@
-﻿namespace api.Domain.DataTypes
+﻿namespace Core.DataTypes
 {
     public abstract record Result<T, E>
     {

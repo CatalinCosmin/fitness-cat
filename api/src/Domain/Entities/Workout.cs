@@ -9,7 +9,7 @@ namespace Core.Entities
         public int AccesibilityLevel { get; set; } = 0;
 
         public List<IExercise> Exercises { get; set; } = new();
-        public IUser? Owner { get; set; } = null;
+        public IUser Owner { get; set; } = new User();
         public List<IWorkoutRoutine> WorkoutRoutine { get; set; } = new();
     }
 }

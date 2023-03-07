@@ -4,8 +4,8 @@ namespace Core.Abstractions.Context
 {
     public interface IExerciseRepository
     {
+        Task<IExercise?> GetExerciseAsync(int id);
         IExercise? GetExercise(int id);
-        IExercise? GetExercise(Func<IExercise, bool> predicate);
         Task<List<IExercise>?> GetExerciseListAsync(int? muscleGroupId = null, int? muscleId = null, int? equipmentId = null, int? difficulty = null);
     }
 }
