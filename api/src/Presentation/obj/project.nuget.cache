@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QKcaHVj8NYamyKrZn3KC3zeaSMJyVUTddmmf+ZfMy7s2IS3vHpI79HyxV1h+tHvt+CN4K1Qd9+GbHHfpfL71vA==",
+  "dgSpecHash": "ddvY6sZM5tTCvDgogWdJ2bnhlW/0kuXmzv2wwNCRRScwF/m7Aw0QoX/hu6mVe9RUk6D6SghrRqKEarQxMt72cw==",
   "success": true,
   "projectFilePath": "D:\\projects\\fitness-cat\\api\\src\\Presentation\\Api.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\Cosmin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Cosmin\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Cosmin\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",

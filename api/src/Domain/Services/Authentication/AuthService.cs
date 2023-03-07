@@ -32,14 +32,19 @@ namespace Core.Services.Authentication
             _configuration = configuration;
         }
 
-        public async Task<Guid> LoginUserAsync(IUser loginDto)
+        public async Task<string?> LoginUserAsync(IUser loginDto)
         {
             var results = _loginValidator.Validate(loginDto);
             if (results.IsValid == false)
             {
                 throw new ValidationException(results.Errors.First().ErrorMessage);
             }
-            var user = (User?)_userRepository.GetUser(x => x.Username == loginDto.Username || x.Email == loginDto.Email);
+            var user = await _userRepository.GetUser(username: loginDto.Username);
+            if (user is null)
+            {
+                user = await _userRepository.GetUser(email: loginDto.Email);
+            }
+
             if (user == null)
             {
                 throw new AuthenticationException();
@@ -56,7 +61,7 @@ namespace Core.Services.Authentication
             await _unitOfWork.SaveAsync();
 
             var jwtToken = CreateJwtToken(user.ID);
-            return user.ID;
+            return jwtToken;
         }
 
         public string CreateJwtToken(Guid id)
@@ -94,36 +99,24 @@ namespace Core.Services.Authentication
             return jwtToken;
         }
 
-        public async Task<List<IValidationFailureResponse>?> RegisterUserAsync(IUser registerDto)
+        public async Task<bool> RegisterUserAsync(IUser registerDto)
         {
-            //var results = await _registerValidator.ValidateAsync(registerDto);
-            //if (results.IsValid == false)
-            //{
-            //    var errors = new List<ValidationFailureResponse>();
-            //    foreach (var error in results.Errors)
-            //    {
-            //        new ValidationFailureResponse { Type = error.PropertyName, Message = error.ErrorMessage })
-            //    return errors;
-            //}
+            var result = await _registerValidator.ValidateAsync(registerDto);
+            if (result.IsValid == false)
+            {
+                return false;
+            }
+            registerDto.Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
 
-            //var user = new User
-            //{
-            //    Username = registerDto.Username,
-            //    Password = BCrypt.Net.BCrypt.HashPassword(registerDto.Password),
-            //    Email = registerDto.Email,
-            //    BirthDate = registerDto.BirthDate,
-            //    AccountCreationDate = DateOnly.FromDateTime(DateTime.UtcNow),
-            //    LastAuthenticationDate = null,
-            //    isVerified = false
-            //};
+            var success = await _userRepository.AddUser(registerDto);
 
-            //_dataContext.Users.Add(user);
-            //await _dataContext.SaveChangesAsync();
+            if(success == false) 
+            {
+                return false;
+            }
+            //SendValidationEmail(registerDto.ID);
 
-            //SendValidationEmail(user);
-
-            //return new Result<bool, List<IValidationFailureResponse>>.Success(true);
-            return null;
+            return true;
         }
 
         public void SendValidationEmail(Guid id)
@@ -215,7 +208,7 @@ namespace Core.Services.Authentication
             }
 
             var email = claim.Value;
-            var user = _userRepository.GetUser(user => user.Email == email);
+            var user = await _userRepository.GetUser(email: email);
             if (user == null)
             {
                 throw new UnauthorizedAccessException();

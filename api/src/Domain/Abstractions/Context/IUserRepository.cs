@@ -5,7 +5,8 @@ namespace Core.Abstractions.Context
 {
     public interface IUserRepository
     {
-        IUser? GetUser(Func<IUser, bool> predicate);
+        Task<bool> AddUser(IUser entity);
+        Task<IUser?> GetUser(string? username = null, string? email = null, Guid? id = null);
         IUser? GetUserById(Guid id);
     }
 }

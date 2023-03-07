@@ -53,7 +53,7 @@ namespace Api.Controllers.EntityControllers
         }
 
         [Authorize]
-        [HttpPatch("{workoutId}/exercise/{exerciseId}")]
+        [HttpDelete("{workoutId}/exercises/{exerciseId}")]
         public async Task<IActionResult> RemoveExercise([FromRoute] Guid workoutId, [FromRoute] int exerciseId)
         {
             var userId = HttpContext.GetAccountId();
@@ -69,7 +69,7 @@ namespace Api.Controllers.EntityControllers
         }
 
         [Authorize]
-        [HttpPut("")]
+        [HttpPost("")]
         public async Task<IActionResult> CreateWorkout([FromQuery] List<int> exercises)
         {
             var userId = HttpContext.GetAccountId();
