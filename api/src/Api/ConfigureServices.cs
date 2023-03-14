@@ -39,11 +39,14 @@ public static class ConfigureServices
             o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(options =>
         {
-            string key = configuration["JWT:Key"]!;
+            var a = 1 + 2;
+            var b = 1 + 2;
+            var c = 1 + 2;
+            string key = "This is a sample secret key - please don't use in production environment.1";
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidIssuer = configuration["JWT:Issuer"],
-                ValidAudience = configuration["JWT:Audience"],
+                ValidIssuer = "JWT:Issuer",
+                ValidAudience = "JWT:Audience",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 ValidateIssuer = true,
                 ValidateAudience = true,

@@ -9,14 +9,13 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY . .
 RUN ls
-RUN dotnet restore "./src/Api/Api.csproj"
+RUN dotnet restore "./src/Api.csproj"
 COPY . .
-RUN dotnet build "./src/Api/Api.csproj" -c Release -o /app/build
-
+RUN dotnet build "./src/Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
 WORKDIR /src
-RUN dotnet publish "./src/Api/Api.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish "./src/Api.csproj" -c Release -o /app/publish --no-restore
 
 FROM base AS final
 WORKDIR /app

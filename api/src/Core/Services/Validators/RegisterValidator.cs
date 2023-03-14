@@ -27,7 +27,7 @@ namespace Core.Services.Validators
             {
                 var u = _userRepository.GetUser(username: Username);
 
-                return u != null;
+                return u == null;
             }).WithMessage("Username is already taken.");
 
             RuleFor(user => user.Email)
@@ -39,7 +39,7 @@ namespace Core.Services.Validators
                 {
                     var u = _userRepository.GetUser(email: Email);
 
-                    return u != null;
+                    return u == null;
                 }).WithMessage("Email is already taken.");
 
             RuleFor(user => user.Password)
