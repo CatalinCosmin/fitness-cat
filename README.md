@@ -40,14 +40,3 @@
       </li>
     </ul>
   </div>
-=======
-<div align="center">
-<h1>Fitness Cat</h1>
-<br />
-<img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" />
-<br />
-Fitness Cat is an API-based fitness management application that allows developers to create applications that enable users to track and manage their fitness progress. The API provides endpoints for registering workout routines and workouts, as well as retrieving data on muscle groups, muscles, and exercises.
-<br />
-<br />
-<br />
-</div>
