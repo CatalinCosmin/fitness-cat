@@ -1,0 +1,31 @@
+#nav_bar .nav-brand {
+    margin-right: 10vw;
+    font-size: xx-large;
+}
+
+#nav_bar .nav-link{
+    color: #f5f7f7;
+}
+#nav_bar .nav-link:hover {
+    color: #EDB51Bc0;
+}
+
+.active {
+    color: #EDB51B !important;
+}
+
+.nav-container {
+    margin-left: 5vw !important; 
+    font-size: larger;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+}
+
+#nav_bar {
+    margin-right: 0 !important;
+}
+
+#nav-bar-component {
+    margin-right: 0 !important;
+}

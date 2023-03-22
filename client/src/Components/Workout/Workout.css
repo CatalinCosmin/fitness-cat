@@ -1,0 +1,32 @@
+.workout-routine-card {
+    background-color: #00040738 !important;
+    padding-left: 1vw !important;
+    padding-right: 1vw !important;
+    padding-top: 2vh !important;
+    padding-bottom: 2vh !important;
+    margin: 0 !important;
+    margin-right: 1vw !important;
+}
+
+.workout-routine-card .workout-routine-card-description {
+    height: 100px !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 4 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.sc-btn {
+    background-color: #EDB51B !important;
+    color: #570214 !important;
+    font-weight: bold !important;
+    border-color: #EDB51B !important;
+}
+
+.sc-btn:hover{
+    background-color: #b38813 !important;
+    color: #570214 !important;
+    font-weight: bold !important;
+    border-color: #b38813 !important;
+}

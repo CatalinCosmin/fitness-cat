@@ -1,0 +1,54 @@
+services:
+  api:
+    depends_on:
+     - "postgres"
+    build: 
+      /api
+    networks:
+      - fitness-cat-network
+    ports:
+      - 80
+      - 443
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=a04Kmgu9
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/fitness-cat.pfx
+  # db:
+  #   image: postgres
+  #   restart: always
+  #   user: postgres
+  #   secrets:
+  #     - db-password
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_PASSWORD_FILE=/devsecrets/postgres_password
+  #   expose:
+  #     - 5432
+  #   healthcheck:
+  #     test: [ "CMD", "pg_isready" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      # change this for a "real" app!
+      POSTGRES_PASSWORD: a04Kmgu9
+    networks:
+      - fitness-cat-network
+
+networks:
+  fitness-cat-network:
+    driver: bridge
+
+secrets:
+  postgres_password:
+    file: ./devsecrets/postgres_password
+volumes:
+  db-data:
