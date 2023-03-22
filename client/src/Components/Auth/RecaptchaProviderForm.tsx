@@ -45,10 +45,10 @@ const ReCaptchaComponent = (props: any) => {
                 type="switch"
                 disabled={isDisabled}
                 checked={checked}
-                label="I am not a robot"
-                className='mb-3 text-muted'
+                className='mb-3 d-inline'
                 onChange={handleChange}
             />
+            <Form.Label className="ml-1 text-muted">I am not a robot</Form.Label>
         </Form.Group>
     );
 };

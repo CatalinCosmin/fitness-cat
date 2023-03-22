@@ -63,32 +63,32 @@ const Login = (props: { token: any, setToken: any }) => {
                     // noValidate
                     // validated={validated}
                     onSubmit={handleSubmit}
-                    className="w-50 px-5 mx-auto align-items-center form"
+                    className="w-35 px-5 mx-auto align-items-center form"
                     action="#"
                 >
                     <Form.Group className="form-head">
                         <Row>
-                            <Col>
-                                <Form.Text className="d-inline form-head-text">
-                                    Login
+                            <Col md={4}>
+                                <Form.Text className="ml-3 pr py-auto">
+                                    Sign-In
                                 </Form.Text>
                             </Col>
-                            <Col>
-                                <Form.Group className="float-right">
-                                    <Form.Text className="d-inline form-head-text">
+                            <Col md="7">
+                                <Form.Group className="float-end py-auto">
+                                    <Form.Text className="d-inline pr-muted mr-1 py-auto font-sm">
                                         Need an account?
                                     </Form.Text>
-                                    <Link className="nav-link d-inline form-head-text pc" to="/register">Register</Link>
+                                    <Link className="nav-link d-inline pc" to="/register"><Button className='d-inline bc bg-sc submit-btn font-sm'>Sign-Up</Button></Link>
                                 </Form.Group>
-
                             </Col>
                         </Row>
                     </Form.Group>
                     <Form.Group className='form-body'>
                         <Form.Group className="mb-3" controlId="formBasicLogin">
                             <Form.Control
-                                className="text-control bg-sc pc"
+                                className="text-control bg-control pc"
                                 type="text"
+                                color="white"
                                 placeholder="Enter username or email"
                                 required
                                 onChange={(event) => setLoginValue(event.currentTarget.value)}
@@ -97,7 +97,7 @@ const Login = (props: { token: any, setToken: any }) => {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Control
-                                className="text-control bg-sc pc"
+                                className="text-control bg-control pc"
                                 type="password"
                                 placeholder="Enter password"
                                 required
@@ -105,7 +105,7 @@ const Login = (props: { token: any, setToken: any }) => {
                             />
                         </Form.Group>
                         <RecaptchaProviderForm action="login" setRecaptchaValueAux={setRecaptchaValue} recaptchaValueAux={recaptchaValue} onCooldownAux={onCooldown} setOnCooldownAux={setOnCooldown} />
-                        <Button type="submit" className='w-100 submit-btn'>
+                        <Button type="submit" className='w-100 bc bg-sc submit-btn'>
                             Submit
                         </Button>
                         {onCooldown === true &&

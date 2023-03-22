@@ -7,11 +7,11 @@
     color: #f5f7f7;
 }
 #nav_bar .nav-link:hover {
-    color: #EDB51Bc0;
+    color: #c1062e;
 }
 
 .active {
-    color: #EDB51B !important;
+    color: #c1062e !important;
 }
 
 .nav-container {

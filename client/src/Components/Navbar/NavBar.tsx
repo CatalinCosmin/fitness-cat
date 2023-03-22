@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, NavbarBrand } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import './NavBar.css';
 
@@ -12,10 +12,12 @@ const NavBar = (props: { token: any, setToken: any }) => {
     
   }
   return (
-    <nav id="nav_bar" className="bg-sc">
+    <nav id="nav_bar" className="bg-navbar">
       <Navbar id="nav-bar-component" collapseOnSelect expand="lg" variant="dark">
         <Container className="nav-container w-100">
-          <Navbar.Brand className="nav-brand pc" href="/">Fitness Cat</Navbar.Brand>
+          <Navbar.Brand className="nav-brand pc" href="/">
+            <img width="200px" src="/fitness-cat-logo.png" alt="Fitness Cat"/>
+          </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link
@@ -47,7 +49,7 @@ const NavBar = (props: { token: any, setToken: any }) => {
                   className={active === "register" ? "nav-link sc" : "nav-link"}
                   onClick={handleClick}
                 >
-                  Sign-In
+                  Sign-Up
                 </Link>}
               {(token !== null && token.length > 2) &&
                 <Link

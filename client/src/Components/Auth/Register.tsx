@@ -97,19 +97,19 @@ const Register = (props: { token: any, setToken: any }) => {
                 >
                     <Form.Group className="form-head">
                         <Row>
-                        <Col><Form.Text className='h6 mx-5'>
-                            Register
-                        </Form.Text>
-                        </Col>
-                        <Col>
-                        <Form.Group className="float-right">
-                        <Form.Text className="d-inline form-head-text">
-                            Already registered?
-                        </Form.Text>
-                        <Link className="nav-link d-inline form-head-text pc" to="/login">Log in</Link>
-                        </Form.Group>
-                        
-                        </Col>
+                            <Col md={3}>
+                                <Form.Text className='ml-3 pr py-auto'>
+                                    Sign-Up
+                                </Form.Text>
+                            </Col>
+                            <Col md="8">
+                                <Form.Group className="float-end py-auto">
+                                    <Form.Text className="d-inline pr-muted mr-1 py-auto font-sm">
+                                        Already have an account?
+                                    </Form.Text>
+                                    <Link className="nav-link d-inline pc" to="/login"><Button className='d-inline bc bg-sc submit-btn font-sm'>Sign-In</Button></Link>
+                                </Form.Group>
+                            </Col>
                         </Row>
                     </Form.Group>
                     <Form.Group className="form-body">
@@ -160,7 +160,7 @@ const Register = (props: { token: any, setToken: any }) => {
                         </Form.Group>
 
                         <Row>
-                            <Form.Group as={Col} sm={8} className="mb-2" controlId="formBasicBirthDate">
+                            <Form.Group as={Col} sm={4} className="mb-2" controlId="formBasicBirthDate">
                                 {/* <Form.Label>Birth Date</Form.Label> */}
                                 <Form.Control
                                     className="text-control bg-sc pc"
@@ -175,20 +175,21 @@ const Register = (props: { token: any, setToken: any }) => {
                         <Form.Group as={Col} className="mb- font-weight-light" controlId="formBasicCheckbox">
                             <Form.Check
                                 type="switch"
-                                className="mx-auto text-muted"
-                                label="You agree with our terms of service"
+                                className="mx-auto text-muted d-inline"
                                 required
-                            />
+                            >
+                            </Form.Check>
+                            <Form.Label className="ml-1 text-muted">You agree with our <Link to="/tos" className="tr">terms of service</Link> </Form.Label>
                             <RecaptchaProviderForm className="my-2" action="register" setRecaptchaValueAux={setRecaptchaValue} recaptchaValueAux={recaptchaValue} onCooldownAux={onCooldown} setOnCooldownAux={setOnCooldown} />
                         </Form.Group>
-                        <Button type="submit" className="w-100 submit-btn">
+                        <Button type="submit" className="bc bg-sc w-100 submit-btn">
                             Submit
                         </Button>
-                        <Form.Group className="mb-3 text-center">
+                        {/* <Form.Group className="mb-3 text-center">
                             <Form.Text className="text-muted" >
                                 We'll never share your data with anyone else.
                             </Form.Text>
-                        </Form.Group>
+                        </Form.Group> */}
                     </Form.Group>
                 </Form>
             </div>

@@ -1,16 +1,3 @@
-.submit-btn {
-    background-color: #EDB51B !important;
-    color: #570214 !important;
-    font-weight: bold !important;
-    border-color: #EDB51B !important;
-}
-
-.submit-btn:hover{
-    background-color: #b38813 !important;
-    color: #570214 !important;
-    font-weight: bold !important;
-    border-color: #b38813 !important;
-}
 
 .form-bg {
     margin: auto !important;
@@ -22,26 +9,6 @@
     margin-right: auto;
     padding-left: 5vw;
     padding-right: 5vw;
-}
-
-.form-head {
-    background-color: #0004077a;
-    font-size: 125%;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-}
-.form-body {
-    background-color: #00040738;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    margin: 0;
-}
-
-.text-control {
-    border-color: #b38813 !important;
-    color: #f5f7f79c !important;
 }
 
 div {
