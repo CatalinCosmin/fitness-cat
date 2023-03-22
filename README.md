@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div style="padding: 20px; border: 1px solid #ccc;">
   <div align="center">
     <h1>Fitness Cat</h1>
@@ -51,5 +50,4 @@ Fitness Cat is an API-based fitness management application that allows developer
 <br />
 <br />
 <br />
->>>>>>> a8172d816aa7f6aa38ab5f101fff4526c31f8314
 </div>
